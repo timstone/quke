@@ -72,15 +72,26 @@ click_button 'Continue'
 @app.correspondence_contact_email_page.submit_button.click
 
 
+# Correspondence contact address page
+@app.correspondence_contact_address_page.wait_for_submit_button
+@app.correspondence_contact_address_page.submit_button.click
 
+# Correspondence contact post code page
+click_button 'Continue'
 
+# Email someone else page
+click_button 'Continue'
 
+# Check your answers page
+click_button 'Continue'
 
-# save_and_open_page
+# Declaration page
+click_button 'Continue'
 end
 
 When(/^I confirm my registration$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  # Confirmation page
+  click_button 'Continue'
 end
 
 Then(/^I will be informed that my application has been received$/) do
