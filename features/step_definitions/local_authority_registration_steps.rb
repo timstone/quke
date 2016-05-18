@@ -7,16 +7,14 @@ Given(/^I register an exemption for a local authority$/) do
   @app.check_location_page.submit_button.click
 
   @app.add_exemption_page.wait_for_check_boxes
-  @app.add_exemption_page.check_boxes.find { |chk| chk.value == '1' }.click
+  
   @app.add_exemption_page.check_boxes.find { |chk| chk.value == '4' }.click
 
   @app.add_exemption_page.submit_button.click
   # sleep(1)
   
-
   @app.check_exemptions_page.wait_for_submit_button
 
-  expect(page).to have_content 'Electrical cable service crossing a main river'
   expect(page).to have_content 'Footbridge over a main river not more than 8 metres wide from bank to bank'
   
   @app.check_exemptions_page.submit_button.click
@@ -95,5 +93,45 @@ When(/^I confirm my registration$/) do
 end
 
 Then(/^I will be informed that my application has been received$/) do
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+Given(/^I register multiple exemptions for a local authority$/) do
+  @app = App.new
+  @app.check_location_page.load
+
+  # @app.check_location_page.radio_buttons.each {|btn| puts btn.value}
+  @app.check_location_page.radio_buttons.find { |btn| btn.value == 'yes' }.click
+  @app.check_location_page.submit_button.click
+
+  @app.add_exemption_page.wait_for_check_boxes
+  @app.add_exemption_page.check_boxes.find { |chk| chk.value == '1' }.click
+  @app.add_exemption_page.check_boxes.find { |chk| chk.value == '4' }.click
+  @app.add_exemption_page.check_boxes.find { |chk| chk.value == '20' }.click
+  @app.add_exemption_page.check_boxes.find { |chk| chk.value == '11' }.click
+
+  @app.add_exemption_page.submit_button.click
+  
+  @app.check_exemptions_page.wait_for_submit_button
+
+  
+  expect(page).to have_content 'Electrical cable service crossing a main river'
+  expect(page).to have_content 'FRA2'
+  expect(page).to have_content 'Footbridge over a main river not more than 8 metres wide from bank to bank'
+  expect(page).to have_content 'FRA5'
+  expect(page).to have_content 'Outfall pipes less than 300mm diameter through a headwall'
+  expect(page).to have_content 'FRA12'
+  expect(page).to have_content 'Removing silt and sand from bridge arches and any material from existing culverts'
+  expect(page).to have_content 'FRA21'
+
+  save_and_open_page
+
+end
+
+Given(/^I remove my chosen exemptions$/) do
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+Then(/^I will be asked to select an exemption activity$/) do
   pending # Write code here that turns the phrase above into concrete actions
 end
