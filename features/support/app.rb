@@ -34,4 +34,7 @@ class App
     CorrespondenceContactTelephonePage.new
   end
   
+  def correspondence_contact_email.page
+    CorrespondenceContactEmailPage.new
+  end
 end
