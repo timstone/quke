@@ -124,12 +124,20 @@ Given(/^I register multiple exemptions for a local authority$/) do
   expect(page).to have_content 'Removing silt and sand from bridge arches and any material from existing culverts'
   expect(page).to have_content 'FRA21'
 
-  save_and_open_page
+  # save_and_open_page
 
 end
 
 Given(/^I remove my chosen exemptions$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  # # @check_exemptions_page.remove_exemption_link.click_link
+  # # click_link('/fre/enrollments//[a-zA-Z0-9]{24}//exemptions/1'')
+  # # find("href").text.should match(\/fre/enrollments/\[a-zA-Z0-9]{24}//exemptions/1\).click
+  # find("href[src$='exemptions/1']")
+  # # find("img[src$='https://www.example.com/image']")
+
+  @app.check_exemptions_page.click_review_link_by_state(1)
+
+
 end
 
 Then(/^I will be asked to select an exemption activity$/) do
