@@ -1,7 +1,6 @@
 # Address page
 class AddressPage < SitePrism::Page
-  element :enter_postcode, "input[id='local_authority_postcode_postcode']"
-  element :submit_button, "input[name='commit']"
-  element :address_list, "input[id='address_match_selection']"
+    element :show_list, "input[id='address_match_selection']"
+  	element :choose_list, "input[id='ENVIRONMENT AGENCY, HORIZON HOUSE, DEANERY ROAD, BRISTOL, BS1 5AH']"
+  	element :submit_button, "input[name='commit']"
 end
-

@@ -42,8 +42,13 @@ class App
     CorrespondenceContactAddressPage.new
   end
 
+  def postcode_page
+    PostCodePage.new
+  end
+
   def address_page
     AddressPage.new
   end
+  
   
 end

@@ -43,14 +43,17 @@ Given(/^I register an exemption for a local authority$/) do
 @app.organisation_name_page.submit_button.click
 
 #Address page - post code lookup
-@app.address_page.wait_for_submit_button
-@app.address_page.enter_postcode.set "BS1 5AH"
-@app.address_page.submit_button.click
+@app.postcode_page.wait_for_submit_button
+@app.postcode_page.enter_postcode.set "BS1 5AH"
+@app.postcode_page.submit_button.click
 
 #Address page - select address from post code lookup list
-@app.address_page.wait_for_submit_button
-@app.address_page.select_option_address_index(2)
+# @app.address_page.wait_for_submit_button
+@app.address_page.wait_for_show_list
+# save_and_open_page
+find('#address_match_selection').find(:xpath, 'option[2]').select_option
 @app.address_page.submit_button.click
+
 
 # click_button 'Continue'
 
@@ -92,7 +95,7 @@ click_button 'Continue'
 click_button 'Continue'
 
 # Declaration page
-click_button 'Continue'
+click_button 'Accept and complete this registration'
 end
 
 When(/^I confirm my registration$/) do
