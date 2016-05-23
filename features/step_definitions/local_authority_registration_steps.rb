@@ -51,7 +51,8 @@ Given(/^I register an exemption for a local authority$/) do
 # @app.address_page.wait_for_submit_button
 @app.address_page.wait_for_show_list
 # save_and_open_page
-find('#address_match_selection').find(:xpath, 'option[2]').select_option
+@app.address_page.results.find(:xpath, 'option[2]').select_option
+# find('#address_match_selection').find(:xpath, 'option[2]').select_option
 @app.address_page.submit_button.click
 
 
@@ -140,14 +141,14 @@ Given(/^I register multiple exemptions for a local authority$/) do
 end
 
 Given(/^I remove my chosen exemptions$/) do
-  # # @check_exemptions_page.remove_exemption_link.click_link
-  # # click_link('/fre/enrollments//[a-zA-Z0-9]{24}//exemptions/1'')
-  # # find("href").text.should match(\/fre/enrollments/\[a-zA-Z0-9]{24}//exemptions/1\).click
-  # find("href[src$='exemptions/1']")
-  # # find("img[src$='https://www.example.com/image']")
+  # puts @app.check_exemptions_page.remove_links.size
+
+  @app.check_exemptions_page.remove_links.each {|link| puts link.text}
+  @app.check_exemptions_page.remove_links.first.click
 
   # @app.check_exemptions_page.click_review_link_by_state(1)
-  @app.check_exemptions_page.remove_link.click
+  # puts @app.check_exemptions_page.remove_links.size
+  # @app.check_exemptions_page.remove_link.click
 
 
 end
