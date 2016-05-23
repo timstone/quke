@@ -42,9 +42,17 @@ Given(/^I register an exemption for a local authority$/) do
 # click_button 'Continue'
 @app.organisation_name_page.submit_button.click
 
-#Address page
-sleep(1)
-click_button 'Continue'
+#Address page - post code lookup
+@app.address_page.wait_for_submit_button
+@app.address_page.enter_postcode.set "BS1 5AH"
+@app.address_page.submit_button.click
+
+#Address page - select address from post code lookup list
+@app.address_page.wait_for_submit_button
+@app.address_page.select_option_address_index(2)
+@app.address_page.submit_button.click
+
+# click_button 'Continue'
 
 # Correspondence contact name page
 @app.correspondence_contact_name_page.wait_for_submit_button
@@ -135,7 +143,8 @@ Given(/^I remove my chosen exemptions$/) do
   # find("href[src$='exemptions/1']")
   # # find("img[src$='https://www.example.com/image']")
 
-  @app.check_exemptions_page.click_review_link_by_state(1)
+  # @app.check_exemptions_page.click_review_link_by_state(1)
+  @app.check_exemptions_page.remove_link.click
 
 
 end

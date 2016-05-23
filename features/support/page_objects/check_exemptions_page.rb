@@ -2,6 +2,7 @@
 class CheckExemptionsPage < SitePrism::Page
   element :add_another_exemption, "input[name='Add another exemption']"
   element :submit_button, "input[name='commit']"
+  element :remove_link, "input[name='Remove exemption FRA2']"
  
 
   def click_review_link_by_state(state)

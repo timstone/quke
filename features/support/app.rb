@@ -42,5 +42,8 @@ class App
     CorrespondenceContactAddressPage.new
   end
 
+  def address_page
+    AddressPage.new
+  end
   
 end
