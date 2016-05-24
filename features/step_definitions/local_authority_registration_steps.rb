@@ -143,16 +143,28 @@ end
 Given(/^I remove my chosen exemptions$/) do
   # puts @app.check_exemptions_page.remove_links.size
 
-  @app.check_exemptions_page.remove_links.each {|link| puts link.text}
+  # @app.check_exemptions_page.remove_links.each {|link| puts link.text}
+  # @app.check_exemptions_page.remove_links.first.click
+  @app.check_exemptions_page.remove_links.first.click
+  # Checks one link is removed
+  expect(@app.check_exemptions_page.remove_links.size).to eq 3
+  # Checks correct link is removed
+  expect(page).not_to have_content('Electrical cable service crossing a main river')
+  
   @app.check_exemptions_page.remove_links.first.click
 
-  # @app.check_exemptions_page.click_review_link_by_state(1)
-  # puts @app.check_exemptions_page.remove_links.size
-  # @app.check_exemptions_page.remove_link.click
+  @app.check_exemptions_page.remove_links.first.click
 
+  @app.check_exemptions_page.remove_links.first.click
 
 end
 
 Then(/^I will be asked to select an exemption activity$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  save_and_open_page
+  # @add_exemption_page.wait_for_submit_button
+  # expect(@add_exemption_page.current_url).to end_with "/add_exemptions"
+  pending
+  
 end
+
+
