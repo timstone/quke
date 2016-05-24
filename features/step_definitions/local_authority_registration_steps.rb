@@ -7,16 +7,14 @@ Given(/^I register an exemption for a local authority$/) do
   @app.check_location_page.submit_button.click
 
   @app.add_exemption_page.wait_for_check_boxes
-  @app.add_exemption_page.check_boxes.find { |chk| chk.value == '1' }.click
+  
   @app.add_exemption_page.check_boxes.find { |chk| chk.value == '4' }.click
 
   @app.add_exemption_page.submit_button.click
   # sleep(1)
   
-
   @app.check_exemptions_page.wait_for_submit_button
 
-  expect(page).to have_content 'Electrical cable service crossing a main river'
   expect(page).to have_content 'Footbridge over a main river not more than 8 metres wide from bank to bank'
   
   @app.check_exemptions_page.submit_button.click
@@ -44,9 +42,21 @@ Given(/^I register an exemption for a local authority$/) do
 # click_button 'Continue'
 @app.organisation_name_page.submit_button.click
 
-#Address page
-sleep(1)
-click_button 'Continue'
+#Address page - post code lookup
+@app.postcode_page.wait_for_submit_button
+@app.postcode_page.enter_postcode.set "BS1 5AH"
+@app.postcode_page.submit_button.click
+
+#Address page - select address from post code lookup list
+# @app.address_page.wait_for_submit_button
+@app.address_page.wait_for_show_list
+# save_and_open_page
+@app.address_page.results.find(:xpath, 'option[2]').select_option
+# find('#address_match_selection').find(:xpath, 'option[2]').select_option
+@app.address_page.submit_button.click
+
+
+# click_button 'Continue'
 
 # Correspondence contact name page
 @app.correspondence_contact_name_page.wait_for_submit_button
@@ -86,7 +96,7 @@ click_button 'Continue'
 click_button 'Continue'
 
 # Declaration page
-click_button 'Continue'
+click_button 'Accept and complete this registration'
 end
 
 When(/^I confirm my registration$/) do
@@ -97,3 +107,64 @@ end
 Then(/^I will be informed that my application has been received$/) do
   pending # Write code here that turns the phrase above into concrete actions
 end
+
+Given(/^I register multiple exemptions for a local authority$/) do
+  @app = App.new
+  @app.check_location_page.load
+
+  # @app.check_location_page.radio_buttons.each {|btn| puts btn.value}
+  @app.check_location_page.radio_buttons.find { |btn| btn.value == 'yes' }.click
+  @app.check_location_page.submit_button.click
+
+  @app.add_exemption_page.wait_for_check_boxes
+  @app.add_exemption_page.check_boxes.find { |chk| chk.value == '1' }.click
+  @app.add_exemption_page.check_boxes.find { |chk| chk.value == '4' }.click
+  @app.add_exemption_page.check_boxes.find { |chk| chk.value == '20' }.click
+  @app.add_exemption_page.check_boxes.find { |chk| chk.value == '11' }.click
+
+  @app.add_exemption_page.submit_button.click
+  
+  @app.check_exemptions_page.wait_for_submit_button
+
+  
+  expect(page).to have_content 'Electrical cable service crossing a main river'
+  expect(page).to have_content 'FRA2'
+  expect(page).to have_content 'Footbridge over a main river not more than 8 metres wide from bank to bank'
+  expect(page).to have_content 'FRA5'
+  expect(page).to have_content 'Outfall pipes less than 300mm diameter through a headwall'
+  expect(page).to have_content 'FRA12'
+  expect(page).to have_content 'Removing silt and sand from bridge arches and any material from existing culverts'
+  expect(page).to have_content 'FRA21'
+
+  # save_and_open_page
+
+end
+
+Given(/^I remove my chosen exemptions$/) do
+  # puts @app.check_exemptions_page.remove_links.size
+
+  # @app.check_exemptions_page.remove_links.each {|link| puts link.text}
+  # @app.check_exemptions_page.remove_links.first.click
+  @app.check_exemptions_page.remove_links.first.click
+  # Checks one link is removed
+  expect(@app.check_exemptions_page.remove_links.size).to eq 3
+  # Checks correct link is removed
+  expect(page).not_to have_content('Electrical cable service crossing a main river')
+  
+  @app.check_exemptions_page.remove_links.first.click
+
+  @app.check_exemptions_page.remove_links.first.click
+
+  @app.check_exemptions_page.remove_links.first.click
+
+end
+
+Then(/^I will be asked to select an exemption activity$/) do
+  # save_and_open_page
+  # @add_exemption_page.wait_for_submit_button
+  # expect(@add_exemption_page.current_url).to end_with "/add_exemptions"
+  expect(page).to have_content 'Add the exemptions you want to register'
+
+end
+
+
