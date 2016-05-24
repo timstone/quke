@@ -160,11 +160,11 @@ Given(/^I remove my chosen exemptions$/) do
 end
 
 Then(/^I will be asked to select an exemption activity$/) do
-  save_and_open_page
+  # save_and_open_page
   # @add_exemption_page.wait_for_submit_button
   # expect(@add_exemption_page.current_url).to end_with "/add_exemptions"
-  pending
-  
+  expect(page).to have_content 'Add the exemptions you want to register'
+
 end
 
 
