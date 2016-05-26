@@ -117,6 +117,9 @@ Given(/^I register multiple exemptions for a local authority$/) do
   @app.check_location_page.submit_button.click
 
   @app.add_exemption_page.wait_for_check_boxes
+  # Check that there are 27 exemptions shown
+  expect(@app.add_exemption_page.check_boxes.size).to eq 25
+  # expect(@app.check_exemptions_page.remove_links.size).to eq 3
   @app.add_exemption_page.check_boxes.find { |chk| chk.value == '1' }.click
   @app.add_exemption_page.check_boxes.find { |chk| chk.value == '4' }.click
   @app.add_exemption_page.check_boxes.find { |chk| chk.value == '20' }.click
