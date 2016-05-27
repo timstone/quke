@@ -38,6 +38,10 @@ class App
     CorrespondenceContactEmailPage.new
   end
 
+  def email_someone_else_page
+    EmailSomeoneElsePage.new
+  end
+
   def correspondence_contact_address_page
     CorrespondenceContactAddressPage.new
   end
@@ -48,6 +52,14 @@ class App
 
   def address_page
     AddressPage.new
+  end
+
+  def check_your_answers_page
+    CheckYourAnswersPage.new
+  end
+  
+  def confirmation_page
+    confirmation_page
   end
   
   
