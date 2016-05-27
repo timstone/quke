@@ -3,4 +3,6 @@ class AddExemptionPage < SitePrism::Page
 	elements :check_boxes, "input[name='add_exemptions[exemption_ids][]']"
 	elements :exemption_label, "div[label='check box']"
   	element :submit_button, "input[name='commit']"
+  	# to do add method to check for exemption number
+
 end

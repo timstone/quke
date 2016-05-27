@@ -77,13 +77,16 @@ Given(/^I register an exemption for a local authority$/) do
 
 # Correspondence contact email address page
 @app.correspondence_contact_email_page.wait_for_submit_button
-@app.correspondence_contact_email_page.fill_contact_email.set "test@example.com"
-@app.correspondence_contact_email_page.fill_confirm_contact_email.set "test@example.com"
+@app.correspondence_contact_email_page.fill_email.set "test@example.com"
+@app.correspondence_contact_email_page.fill_confirm_email.set "test@example.com"
 @app.correspondence_contact_email_page.submit_button.click
 
 
 # # Email someone else page
-click_button 'Continue'
+@app.email_someone_else_page.wait_for_submit_button
+@app.email_someone_else_page.fill_email.set "other@example.com"
+@app.email_someone_else_page.fill_confirm_email.set "other@example.com"
+@app.email_someone_else_page.submit_button.click
 
 # Check your answers page
 
@@ -97,7 +100,6 @@ expect(page).to have_content 'HORIZON HOUSE, DEANERY ROAD, BRISTOL, BS1 5AH'
 expect(page).to have_content  'Local authority or public body'
 @app.check_your_answers_page.submit_button.click
 
-# click_button 'Continue'
 end
 
 
@@ -107,7 +109,7 @@ click_button 'Accept and complete this registration'
 end
 
 Then(/^I will be informed that my application has been received$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  expect(page).to have_content 'Registration complete'
 end
 
 Given(/^I register multiple exemptions for a local authority$/) do
@@ -121,7 +123,7 @@ Given(/^I register multiple exemptions for a local authority$/) do
   @app.add_exemption_page.wait_for_check_boxes
   # Check that there are 27 exemptions shown
   expect(@app.add_exemption_page.check_boxes.size).to eq 27
-  # expect(@app.check_exemptions_page.remove_links.size).to eq 3
+  
   @app.add_exemption_page.check_boxes.find { |chk| chk.value == '1' }.click
   @app.add_exemption_page.check_boxes.find { |chk| chk.value == '4' }.click
   @app.add_exemption_page.check_boxes.find { |chk| chk.value == '20' }.click
@@ -140,8 +142,6 @@ Given(/^I register multiple exemptions for a local authority$/) do
   expect(page).to have_content 'FRA12'
   expect(page).to have_content 'Removing silt and sand from bridge arches and any material from existing culverts'
   expect(page).to have_content 'FRA21'
-
-  # save_and_open_page
 
 end
 
@@ -165,9 +165,11 @@ Given(/^I remove my chosen exemptions$/) do
 end
 
 Then(/^I will be asked to select an exemption activity$/) do
-  # save_and_open_page
-  # @add_exemption_page.wait_for_submit_button
-  # expect(@add_exemption_page.current_url).to end_with "/add_exemptions"
+  @app.add_exemption_page.wait_for_submit_button
+  # check correct number of exemptions on page
+  expect(@app.add_exemption_page.check_boxes.size).to eq 27
+
+
   expect(page).to have_content 'Add the exemptions you want to register'
 
 end
