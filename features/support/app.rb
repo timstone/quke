@@ -49,6 +49,10 @@ class App
   def address_page
     AddressPage.new
   end
+
+  def check_your_answers_page
+    CheckYourAnswersPage.new
+  end
   
   
 end

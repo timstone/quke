@@ -3,8 +3,8 @@ Given(/^I register an exemption for a local authority$/) do
   @app.check_location_page.load
 
   # @app.check_location_page.radio_buttons.each {|btn| puts btn.value}
-  @app.check_location_page.radio_buttons.find { |btn| btn.value == 'yes' }.click
-  @app.check_location_page.submit_button.click
+  # @app.check_location_page.radio_buttons.find { |btn| btn.value == 'yes' }.click
+  # @app.check_location_page.submit_button.click
 
   @app.add_exemption_page.wait_for_check_boxes
   
@@ -82,26 +82,28 @@ Given(/^I register an exemption for a local authority$/) do
 @app.correspondence_contact_email_page.submit_button.click
 
 
-# Correspondence contact address page
-@app.correspondence_contact_address_page.wait_for_submit_button
-@app.correspondence_contact_address_page.submit_button.click
-
-# Correspondence contact post code page
-click_button 'Continue'
-
-# Email someone else page
+# # Email someone else page
 click_button 'Continue'
 
 # Check your answers page
-click_button 'Continue'
 
-# Declaration page
-click_button 'Accept and complete this registration'
+@app.check_your_answers_page.wait_for_submit_button
+expect(page).to have_content 'Footbridge over a main river not more than 8 metres wide from bank to bank'
+expect(page).to have_content 'test@example.com'
+expect(page).to have_content  'Joe Bloggs'
+expect(page).to have_content 'ST 58132 72695'
+expect(page).to have_content 'Testminster council'
+expect(page).to have_content 'HORIZON HOUSE, DEANERY ROAD, BRISTOL, BS1 5AH'
+expect(page).to have_content  'Local authority or public body'
+@app.check_your_answers_page.submit_button.click
+
+# click_button 'Continue'
 end
 
+
 When(/^I confirm my registration$/) do
-  # Confirmation page
-  click_button 'Continue'
+# Declaration page
+click_button 'Accept and complete this registration'
 end
 
 Then(/^I will be informed that my application has been received$/) do
@@ -113,12 +115,12 @@ Given(/^I register multiple exemptions for a local authority$/) do
   @app.check_location_page.load
 
   # @app.check_location_page.radio_buttons.each {|btn| puts btn.value}
-  @app.check_location_page.radio_buttons.find { |btn| btn.value == 'yes' }.click
-  @app.check_location_page.submit_button.click
+  # @app.check_location_page.radio_buttons.find { |btn| btn.value == 'yes' }.click
+  # @app.check_location_page.submit_button.click
 
   @app.add_exemption_page.wait_for_check_boxes
   # Check that there are 27 exemptions shown
-  expect(@app.add_exemption_page.check_boxes.size).to eq 25
+  expect(@app.add_exemption_page.check_boxes.size).to eq 27
   # expect(@app.check_exemptions_page.remove_links.size).to eq 3
   @app.add_exemption_page.check_boxes.find { |chk| chk.value == '1' }.click
   @app.add_exemption_page.check_boxes.find { |chk| chk.value == '4' }.click
