@@ -23,6 +23,7 @@ Given(/^I register an exemption for a local authority$/) do
 # Grid reference page
   @app.grid_reference_page.wait_for_submit_button
   @app.grid_reference_page.fill_grid_ref.set "ST 58132 72695"
+  @app.grid_reference_page.fill_site_description.set "Location of activity"
   # fill_in('grid_reference_grid_reference', :with => 'ST 58132 72695')
   @app.grid_reference_page.submit_button.click
   # click_button 'Continue'
