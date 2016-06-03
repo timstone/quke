@@ -175,4 +175,47 @@ Then(/^I will be asked to select an exemption activity$/) do
 
 end
 
+Given(/^I'm registering a new exemption$/) do
+    @app = App.new
+  @app.check_location_page.load
+
+  # @app.check_location_page.radio_buttons.each {|btn| puts btn.value}
+  # @app.check_location_page.radio_buttons.find { |btn| btn.value == 'yes' }.click
+  # @app.check_location_page.submit_button.click
+
+  
+end
+
+When(/^I select an FRA(\d+) dredging exemption activity$/) do |arg1|
+  @app.add_exemption_page.wait_for_check_boxes
+
+  @exemption_number = arg1 
+  
+  @app.add_exemption_page.check_boxes.find { |chk| chk.value == @exemption_number }.click
+
+  @app.add_exemption_page.submit_button.click
+  
+  @app.check_exemptions_page.wait_for_submit_button
+
+  @app.check_exemptions_page.submit_button.click
+end
+
+Then(/^I will be asked to provide location details$/) do
+  @app.grid_reference_page.wait_for_submit_button
+  @app.grid_reference_page.fill_grid_ref.set "ST 58132 72695"
+  @app.grid_reference_page.fill_site_description.set "Location of activity"
+end
+
+Then(/^I will be asked to give the length of dredging planned$/) do
+  # @app.grid_reference_page.fill_dredging_length.set "1500"
+  # @app.grid_reference_page.submit_button
+  pending
+
+end
+
+Then(/^I will not be asked to give the length of dredging planned$/) do
+  expect(page).not_to have_content 'Approximate length of dredging in metres'
+  # pending
+end
+
 
