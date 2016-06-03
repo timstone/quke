@@ -6,10 +6,12 @@ end
 Given(/^I register exemption FRA(\d+)$/) do |arg1|
   
   @app.add_exemption_page.wait_for_check_boxes
-
+save_and_open_page
   @exemption_number == arg1
+
+  puts @exemption_number
   
-  @app.add_exemption_page.check_boxes.find { |chk| chk.value == @arg1 }.click
+  @app.add_exemption_page.check_boxes.find { |chk| chk.value == @exemption_number }.click
 
   @app.add_exemption_page.submit_button.click
   
