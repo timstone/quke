@@ -6,10 +6,10 @@ end
 Given(/^I register exemption FRA(\d+)$/) do |arg1|
   
   @app.add_exemption_page.wait_for_check_boxes
-save_and_open_page
-  @exemption_number == arg1
+# save_and_open_page
+  @exemption_number = arg1
 
-  puts @exemption_number
+  # puts @exemption_number
   
   @app.add_exemption_page.check_boxes.find { |chk| chk.value == @exemption_number }.click
 
@@ -23,16 +23,7 @@ save_and_open_page
   @app.grid_reference_page.fill_grid_ref.set "ST 58132 72695"
   @app.grid_reference_page.fill_site_description.set "Location of activity"
   @app.grid_reference_page.submit_button.click
-  
-  # Grid reference page
-  @app.grid_reference_page.wait_for_submit_button
-  @app.grid_reference_page.fill_grid_ref.set "ST 58132 72695"
-  @app.grid_reference_page.fill_site_description.set "Location of activity"
-  # fill_in('grid_reference_grid_reference', :with => 'ST 58132 72695')
-  @app.grid_reference_page.submit_button.click
-  # click_button 'Continue'
-  
-  
+    
   # User type page
   @app.user_type_page.wait_for_submit_button
   @app.user_type_page.radio_buttons.find { |btn| btn.value == 'limited_company' }.click

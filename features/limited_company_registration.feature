@@ -8,7 +8,7 @@ Feature: Limited company registers flood risk activity exemption
 
   @happy_path
   Scenario: Limited company registers location for flood risk activity exemption
-  Given I register exemption FRA20
+  Given I register exemption FRA10
   And I register as a limited company
   When I confirm my registration
   Then I will be informed that my application has been received
