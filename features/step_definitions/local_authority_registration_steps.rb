@@ -207,8 +207,10 @@ Then(/^I will be asked to provide location details$/) do
 end
 
 Then(/^I will be asked to give the length of dredging planned$/) do
-  @app.grid_reference_page.fill_dredging_length.set "1500"
-  @app.grid_reference_page.submit_button
+  # @app.grid_reference_page.fill_dredging_length.set "1500"
+  # @app.grid_reference_page.submit_button
+  pending
+
 end
 
 Then(/^I will not be asked to give the length of dredging planned$/) do
