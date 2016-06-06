@@ -111,6 +111,7 @@ When(/^I confirm my registration$/) do
 end
 
 Then(/^I will be informed that my application has been received$/) do
+  save_and_open_page
   expect(page).to have_content 'Registration complete'
 end
 
