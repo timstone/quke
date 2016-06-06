@@ -22,6 +22,10 @@ class App
   	UserTypePage.new
   end
 
+  def limited_company_number_page
+    LimitedCompanyNumberPage.new
+  end
+  
   def organisation_name_page
   	OrganisationNamePage.new
   end
@@ -59,8 +63,13 @@ class App
   end
   
   def confirmation_page
-    confirmation_page
+    ConfirmationPage.new
   end
   
+  def declaration_page
+    DeclarationPage.new
+  end
+  
+
   
 end

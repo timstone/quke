@@ -106,7 +106,8 @@ end
 
 When(/^I confirm my registration$/) do
 # Declaration page
-click_button 'Accept and complete this registration'
+# click_button 'Accept and complete this registration'
+@app.declaration_page.declaration_button.click
 end
 
 Then(/^I will be informed that my application has been received$/) do
