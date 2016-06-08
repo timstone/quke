@@ -115,9 +115,11 @@ Then(/^I will be informed that my application has been received$/) do
   expect(page).to have_content 'Registration complete'
 end
 
-Given(/^I register multiple exemptions for a local authority$/) do
+Given(/^I register an FRA(\d+) exemption for a local authority$/) do |arg1|
   @app = App.new
   @app.check_location_page.load
+
+  @exemption_number = 'FRA' + arg1
 
   # @app.check_location_page.radio_buttons.each {|btn| puts btn.value}
   # @app.check_location_page.radio_buttons.find { |btn| btn.value == 'yes' }.click
@@ -129,43 +131,32 @@ Given(/^I register multiple exemptions for a local authority$/) do
 
   # @app.add_exemption_page.check_boxes.each {|fra| puts fra.data-code}
   
-  @app.add_exemption_page.check_boxes.find { |chk| chk['data-code']  == 'FRA2' }.click
-  @app.add_exemption_page.check_boxes.find { |chk| chk['data-code'] == 'FRA5' }.click
-  @app.add_exemption_page.check_boxes.find { |chk| chk['data-code'] == 'FRA21' }.click
-  @app.add_exemption_page.check_boxes.find { |chk| chk['data-code'] == 'FRA12' }.click
+  @app.add_exemption_page.check_boxes.find { |chk| chk['data-code']  == @exemption_number }.click
+
 
   @app.add_exemption_page.submit_button.click
   
   @app.check_exemptions_page.wait_for_submit_button
 
   
-  expect(page).to have_content 'Electrical cable service crossing a main river'
-  expect(page).to have_content 'FRA2'
-  expect(page).to have_content 'Footbridge over a main river not more than 8 metres wide from bank to bank'
-  expect(page).to have_content 'FRA5'
-  expect(page).to have_content 'Outfall pipes less than 300mm diameter through a headwall'
-  expect(page).to have_content 'FRA12'
-  expect(page).to have_content 'Removing silt and sand from bridge arches and any material from existing culverts'
-  expect(page).to have_content 'FRA21'
+  # expect(page).to have_content 'Electrical cable service crossing a main river'
+  expect(page).to have_content @exemption_number
+
 
 end
 
-Given(/^I remove my chosen exemptions$/) do
+Given(/^I remove my chosen exemption$/) do
   # puts @app.check_exemptions_page.remove_links.size
 
   # @app.check_exemptions_page.remove_links.each {|link| puts link.text}
   # @app.check_exemptions_page.remove_links.first.click
   @app.check_exemptions_page.remove_links.first.click
   # Checks one link is removed
-  expect(@app.check_exemptions_page.remove_links.size).to eq 3
+  expect(@app.check_exemptions_page.remove_links.size).to eq 0
   # Checks correct link is removed
-  expect(page).not_to have_content('Electrical cable service crossing a main river')
+  # expect(page).not_to have_content('Electrical cable service crossing a main river')
   
-  @app.check_exemptions_page.remove_links.first.click
-
-  @app.check_exemptions_page.remove_links.first.click
-
-  @app.check_exemptions_page.remove_links.first.click
+ 
 
 end
 
@@ -175,7 +166,7 @@ Then(/^I will be asked to select an exemption activity$/) do
   expect(@app.add_exemption_page.check_boxes.size).to eq 27
 
 
-  expect(page).to have_content 'Add the exemptions you want to register'
+  expect(page).to have_content 'Select the exemption you want to register'
 
 end
 

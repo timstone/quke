@@ -10,8 +10,8 @@ Scenario: Local authoriy registers location for flood risk activity exemption
   Then I will be informed that my application has been received
 
  Scenario: Local authority registers multiple exemptions then removes all from registration
- Given I register multiple exemptions for a local authority
- But I remove my chosen exemptions
+ Given I register an FRA2 exemption for a local authority
+ But I remove my chosen exemption
  Then I will be asked to select an exemption activity
 
 
