@@ -6,9 +6,9 @@ Given(/^I register an exemption for a local authority$/) do
   # @app.check_location_page.radio_buttons.find { |btn| btn.value == 'yes' }.click
   # @app.check_location_page.submit_button.click
 
-  @app.add_exemption_page.wait_for_check_boxes
+  @app.add_exemption_page.wait_for_select_radio_button
   
-  @app.add_exemption_page.check_boxes.find { |chk| chk.value == '4' }.click
+  @app.add_exemption_page.select_radio_button.find { |chk| chk.value == '4' }.click
 
   @app.add_exemption_page.submit_button.click
   # sleep(1)
@@ -125,13 +125,13 @@ Given(/^I register an FRA(\d+) exemption for a local authority$/) do |arg1|
   # @app.check_location_page.radio_buttons.find { |btn| btn.value == 'yes' }.click
   # @app.check_location_page.submit_button.click
 
-  @app.add_exemption_page.wait_for_check_boxes
+  @app.add_exemption_page.wait_for_select_radio_button
   # Check that there are 27 exemptions shown
-  expect(@app.add_exemption_page.check_boxes.size).to eq 27
+  expect(@app.add_exemption_page.select_radio_button.size).to eq 27
 
-  # @app.add_exemption_page.check_boxes.each {|fra| puts fra.data-code}
+  # @app.add_exemption_page.select_radio_button.each {|fra| puts fra.data-code}
   
-  @app.add_exemption_page.check_boxes.find { |chk| chk['data-code']  == @exemption_number }.click
+  @app.add_exemption_page.select_radio_button.find { |chk| chk['data-code']  == @exemption_number }.click
 
 
   @app.add_exemption_page.submit_button.click
@@ -163,7 +163,7 @@ end
 Then(/^I will be asked to select an exemption activity$/) do
   @app.add_exemption_page.wait_for_submit_button
   # check correct number of exemptions on page
-  expect(@app.add_exemption_page.check_boxes.size).to eq 27
+  expect(@app.add_exemption_page.select_radio_button.size).to eq 27
 
 
   expect(page).to have_content 'Select the exemption you want to register'
@@ -182,13 +182,13 @@ Given(/^I'm registering a new exemption$/) do
 end
 
 When(/^I select an FRA(\d+) dredging exemption activity$/) do |arg1|
-  @app.add_exemption_page.wait_for_check_boxes
+  @app.add_exemption_page.wait_for_select_radio_button
 
   @exemption_number = 'FRA' + arg1 
 
   # puts @exemption_number
   
-  @app.add_exemption_page.check_boxes.find { |chk| chk['data-code'] == @exemption_number }.click
+  @app.add_exemption_page.select_radio_button.find { |chk| chk['data-code'] == @exemption_number }.click
 
 
   @app.add_exemption_page.submit_button.click
