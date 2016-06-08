@@ -106,10 +106,12 @@ end
 
 When(/^I confirm my registration$/) do
 # Declaration page
-click_button 'Accept and complete this registration'
+# click_button 'Accept and complete this registration'
+@app.declaration_page.declaration_button.click
 end
 
 Then(/^I will be informed that my application has been received$/) do
+  # save_and_open_page
   expect(page).to have_content 'Registration complete'
 end
 
@@ -124,11 +126,13 @@ Given(/^I register multiple exemptions for a local authority$/) do
   @app.add_exemption_page.wait_for_check_boxes
   # Check that there are 27 exemptions shown
   expect(@app.add_exemption_page.check_boxes.size).to eq 27
+
+  # @app.add_exemption_page.check_boxes.each {|fra| puts fra.data-code}
   
-  @app.add_exemption_page.check_boxes.find { |chk| chk.value == '1' }.click
-  @app.add_exemption_page.check_boxes.find { |chk| chk.value == '4' }.click
-  @app.add_exemption_page.check_boxes.find { |chk| chk.value == '20' }.click
-  @app.add_exemption_page.check_boxes.find { |chk| chk.value == '11' }.click
+  @app.add_exemption_page.check_boxes.find { |chk| chk['data-code']  == 'FRA2' }.click
+  @app.add_exemption_page.check_boxes.find { |chk| chk['data-code'] == 'FRA5' }.click
+  @app.add_exemption_page.check_boxes.find { |chk| chk['data-code'] == 'FRA21' }.click
+  @app.add_exemption_page.check_boxes.find { |chk| chk['data-code'] == 'FRA12' }.click
 
   @app.add_exemption_page.submit_button.click
   
@@ -189,9 +193,12 @@ end
 When(/^I select an FRA(\d+) dredging exemption activity$/) do |arg1|
   @app.add_exemption_page.wait_for_check_boxes
 
-  @exemption_number = arg1 
+  @exemption_number = 'FRA' + arg1 
+
+  # puts @exemption_number
   
-  @app.add_exemption_page.check_boxes.find { |chk| chk.value == @exemption_number }.click
+  @app.add_exemption_page.check_boxes.find { |chk| chk['data-code'] == @exemption_number }.click
+
 
   @app.add_exemption_page.submit_button.click
   
@@ -207,9 +214,9 @@ Then(/^I will be asked to provide location details$/) do
 end
 
 Then(/^I will be asked to give the length of dredging planned$/) do
-  # @app.grid_reference_page.fill_dredging_length.set "1500"
-  # @app.grid_reference_page.submit_button
-  pending
+  @app.grid_reference_page.fill_dredging_length.set "1500"
+  @app.grid_reference_page.submit_button
+  # pending
 
 end
 

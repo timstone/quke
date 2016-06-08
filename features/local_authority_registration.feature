@@ -17,7 +17,7 @@ Scenario: Local authoriy registers location for flood risk activity exemption
 
  Scenario: Registering FRA23 dredging up to 1.5km exemption requires a dredging length
  Given I'm registering a new exemption
- When I select an FRA3 dredging exemption activity
+ When I select an FRA23 dredging exemption activity
  Then I will be asked to provide location details
  And I will be asked to give the length of dredging planned
 
