@@ -112,7 +112,7 @@ end
 
 Then(/^I will be informed that my application has been received$/) do
   # save_and_open_page
-  expect(page).to have_content 'Registration complete'
+  expect(page).to have_content 'Registration submitted '
 end
 
 Given(/^I register an FRA(\d+) exemption for a local authority$/) do |arg1|
