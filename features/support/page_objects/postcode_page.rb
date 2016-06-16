@@ -4,6 +4,7 @@ class PostCodePage < SitePrism::Page
   element :enter_limited_company_postcode, "input[id='limited_company_postcode_postcode']"
   element :enter_llp_postcode, "input[id='limited_liability_partnership_postcode_postcode']"
   element :enter_individual_postcode, "input[id='individual_postcode_postcode']"
+  element :enter_other_postcode, "input[id='other_postcode_postcode']"
   element :submit_button, "input[name='commit']"
 
   def PostCodePageSelectAddressFromPostcode(postcode: 'BS1 5AH')
