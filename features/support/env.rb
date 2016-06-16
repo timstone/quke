@@ -29,7 +29,7 @@ require 'site_prism'
 Capybara.register_driver :poltergeist do |app|
   options = {
     # Javascript errors will get re-raised in our tests causing them to fail
-    js_errors: true,
+    js_errors: false,
     # How long in seconds we'll wait for response when communicating with
     # Phantomjs
     timeout: 30,
@@ -82,3 +82,5 @@ $pause = (ENV['PAUSE'] || 0).to_i
 SitePrism.configure do |config|
   config.use_implicit_waits = true
 end
+
+
