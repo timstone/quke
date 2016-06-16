@@ -7,11 +7,17 @@ Given(/^I register exemption FRA(\d+)$/) do |arg1|
   
   @app.add_exemption_page.wait_for_submit_button
 
-  @exemption_number = arg1
+  # @exemption_number = arg1
 
-  puts @exemption_number
+  # puts @exemption_number
 
-  @app.add_exemption_page.select_radio_button.find { |chk| chk.value == @exemption_number }.click
+  # @app.add_exemption_page.select_radio_button.find { |chk| chk.value == @exemption_number }.click
+
+  @exemption_number = 'FRA' + arg1 
+
+  # puts @exemption_number
+  
+  @app.add_exemption_page.select_radio_button.find { |chk| chk['data-code'] == @exemption_number }.click
 
   @app.add_exemption_page.submit_button.click
   
