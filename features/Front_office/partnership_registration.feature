@@ -1,4 +1,4 @@
-Feature: Charity (other user type) registers flood risk activity exemption
+Feature: Partnership registers flood risk activity exemption
   As a partnership
   I want to register a location for a flood risk activity exemptions
   So that I can check that my activity does not harm the environment in that area
@@ -7,8 +7,15 @@ Feature: Charity (other user type) registers flood risk activity exemption
   Given I register for a new exemption
 
   @happy_path
-  Scenario: Partnership registers location for flood risk activity exemption with manual address
+  Scenario: Partnership registers location for flood risk activity exemption
   Given I register exemption FRA11
   And I register as a partnership
+  When I confirm my registration
+  Then I will be informed that my application has been received
+
+  Scenario: Partnership changes registration partnership details
+  Given I register exemption FRA17
+  And I register as a partnership
+  But change my partnership details
   When I confirm my registration
   Then I will be informed that my application has been received

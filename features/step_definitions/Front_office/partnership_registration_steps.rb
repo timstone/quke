@@ -82,3 +82,7 @@ Given(/^I register as a partnership$/) do
 
 @app.check_your_answers_page.submit_button.click
 end
+
+Given(/^change my partnership details$/) do
+  pending # Write code here that turns the phrase above into concrete actions
+end
