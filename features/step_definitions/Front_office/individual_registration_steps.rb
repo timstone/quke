@@ -43,15 +43,15 @@ Given(/^I register as an individual$/) do
 
 # Correspondence contact email address page
 @app.correspondence_contact_email_page.wait_for_submit_button
-@app.correspondence_contact_email_page.fill_email.set "test@example.com"
-@app.correspondence_contact_email_page.fill_confirm_email.set "test@example.com"
+@app.correspondence_contact_email_page.fill_email.set "tim.stone.ea@gmail.com"
+@app.correspondence_contact_email_page.fill_confirm_email.set "tim.stone.ea@gmail.com"
 @app.correspondence_contact_email_page.submit_button.click
 
 
 # # Email someone else page
 @app.email_someone_else_page.wait_for_submit_button
-@app.email_someone_else_page.fill_email.set "other@example.com"
-@app.email_someone_else_page.fill_confirm_email.set "other@example.com"
+@app.email_someone_else_page.fill_email.set "tim.stone.ea+1@gmail.com"
+@app.email_someone_else_page.fill_confirm_email.set "tim.stone.ea+1@gmail.com"
 @app.email_someone_else_page.submit_button.click
 
 # Check your answers page
