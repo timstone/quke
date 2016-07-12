@@ -21,7 +21,7 @@ Given(/^I register as a LLP$/) do
   @app.postcode_page.submit_button.click
 
   @app.address_page.wait_for_submit_button
-  click_link 'I can’t find the address in the list'
+  click_link 'Enter address manually'
 
   @app.address_page.fill_address_premises.set "1"
   @app.address_page.fill_street_address.set "Test street"
