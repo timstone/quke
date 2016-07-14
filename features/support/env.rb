@@ -29,7 +29,7 @@ require 'site_prism'
 Capybara.register_driver :poltergeist do |app|
   options = {
     # Javascript errors will get re-raised in our tests causing them to fail
-    js_errors: false,
+    js_errors: true,
     # How long in seconds we'll wait for response when communicating with
     # Phantomjs
     timeout: 30,

@@ -30,6 +30,10 @@ class App
   	OrganisationNamePage.new
   end
 
+  def partnership_details_page
+    PartnershipPage.new
+  end
+
   def correspondence_contact_name_page
     CorrespondenceContactNamePage.new
   end
