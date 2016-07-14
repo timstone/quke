@@ -14,19 +14,12 @@ Feature: Partnership registers flood risk activity exemption
   Then I will be informed that my application has been received
 
   @wip
-  @javascript
   Scenario: Partnership changes registration partnership details
   Given I register exemption FRA17
   And I register as a partnership with three partners
   But remove one partner
   When I confirm my registration
   Then I will be informed that my application has been received
-@wip
-  Scenario: Partnership changes registration partnership details with javascript turned off
-  Given I register exemption FRA17
-  And I register as a partnership with three partners
-  But remove one partner with javascript turned off
-  When I confirm my registration
-  Then I will be informed that my application has been received
+
 
 
